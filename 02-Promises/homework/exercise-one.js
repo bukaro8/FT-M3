@@ -92,15 +92,7 @@ function problemC () {
    */
 
   // callback version
-  // readFile('poem-one/stanza-02.txt', function (err, stanza2) {
-  //   console.log('-- C. callback version (stanza two) --');
-  //   blue(stanza2);
-  //   readFile('poem-one/stanza-03.txt', function (err, stanza3) {
-  //     console.log('-- C. callback version (stanza three) --');
-  //     blue(stanza3);
-  //     console.log('-- C. callback version done --');
-  //   });
-  // });
+  // 
 promisifiedReadFile('poem-one/stanza-02.txt')
 .then(data=>blue(data))
 .then(promisifiedReadFile('poem-one/stanza-03.txt')
@@ -187,9 +179,11 @@ function problemF () {
   //   });
   // });
   promisifiedReadFile('poem-one/stanza-03.txt')
-  .then(data=>blue(data))
-  .then( promisifiedReadFile('poem-one/stanza-04.txt')
-        .then(data=>blue(data)))
+  .then(data=>{
+    blue(data)
+    promisifiedReadFile('poem-one/stanza-04.txt')
+        .then(data=>blue(data))})
+  
   .then(console.log('done'))
   .catch(err=>magenta(err))
   
